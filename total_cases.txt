@@ -1,4 +1,3 @@
-TOTAL_CASES
 27
 27
 33
