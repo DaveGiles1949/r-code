@@ -9,8 +9,6 @@
 # ------------------------------------------------------------------------------------------------
 
 library(growthcurver)
-library(curl)
-library(data.table)    # For the "fread" command to read data file from webpage
 n_min<- 26             # Smallest number of days to include in the sequential anlaysis
 n_max<- 30             # Largest number of days to include in the sequential analysis
                        # NOTE: "Day 1" is 2 March, 2020
