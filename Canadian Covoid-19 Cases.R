@@ -22,9 +22,7 @@ inflection<- c()
 max_doub_time<- c()
 exp_growth<- c()
 
-#cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/total_cases.txt", header=TRUE)
-file_name <- "C:/Users/David Giles/Desktop/Virus/total_cases.txt"
-cases <- read.table(file_name, header = TRUE)
+cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/total_cases.txt", header=TRUE)
 tot<- cases$TOTAL_CASES
 
 # Run the model over various samples of data, beginning on 2 March
