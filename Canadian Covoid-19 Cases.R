@@ -22,7 +22,7 @@ inflection<- c()
 max_doub_time<- c()
 exp_growth<- c()
 
-cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian Covoid-19 Cases.txt", header=TRUE)
+cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian Covid-19 Cases.txt", header=TRUE)
 tot<- cases$TOTAL_CASES
 
 # Run the model over various samples of data, beginning on 2 March
