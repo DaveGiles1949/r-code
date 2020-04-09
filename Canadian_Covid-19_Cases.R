@@ -1,0 +1,119 @@
+# CODE FOR MODELLING THE GROWTH CURVE OF TOTAL CONFIRMED COVID-19 CASES IN CANADA
+
+# (AVAILABLE AT:  https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Cases.R )
+# ---------------------------------------------------------------------------------------------------------
+
+# DATA SOURCE:    https://www.covid-19canada.com/
+
+# AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
+
+# LAST UPDATED:   9 April, 2020
+# ---------------------------------------------------------------------------------------------------------
+
+library(growthcurver)
+
+today <- Sys.Date()
+
+inflection<- c()
+doub_time<- c()
+est_doub_time<- c()
+gof<- c()
+pred<- c()
+ 
+#cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Cases.txt", header=TRUE)
+file_name <- "C:/Users/David Giles/Desktop/Virus/Canadian_Covid-19_Cases.txt"
+cases <- read.table(file_name, header = TRUE)
+tot<- cases$TOTAL_CASES
+n_min<- 26             # Smallest number of days to include in the sequential anlaysis
+n_max<- length(tot)    # Largest number of days to include in the sequential analysis
+                       # NOTE: "Day 1" for this analysis is 2 March, 2020
+
+# Run the model over various samples of data, beginning on 2 March
+for (ii in n_min:n_max) {
+t<- seq(1:ii)
+total<- tot[1:ii]
+
+# Now use "Growthcurver" to fit Logistic Growth Model
+gc_fit <- SummarizeGrowth(t, total)
+gc_fit    # "DT" is the (max.)doubling time
+          # auc_l The area under the curve of the fitted logistic equation from time 0 to time t
+          # auc_e The area under the curve of the measurements.
+          # t_mid is the time of the point of inflection (half way to max. capacity)
+gc_fit$vals
+gc_fit$vals$note            # Are there any warning notes?
+inflection<- c(inflection,gc_fit$vals$t_mid)
+doub_time<- c(doub_time,log(2)/log(tot[ii]/tot[ii-1]))
+est_doub_time<- c(est_doub_time,gc_fit$vals$t_gen )
+gof<- c(gof,gc_fit$vals$auc_l/gc_fit$vals$auc_e)
+
+}
+
+# Simple Exponential Growth Model using latest sample
+egm<- lm(log(total) ~ t)
+summary(egm)
+egm_pred<- exp(predict(egm))               # Convert prediction of "log(total)" to one for "total" itself
+Duan<- mean(exp(log(total)-predict(egm)))  
+egm_fit<- egm_pred*Duan
+                                           # Reduce bias of the "raw" prediction by using Duan's non-parametric smoother
+                                           # (See https://davegiles.blogspot.com/2014/12/s.html)
+
+# Use the Logistic model to predict beyond the end of the full sample by 1 week:
+
+n_pred<- n_max + 7
+
+for (jj in 1:n_pred) {
+f <- gc_fit$vals$n0*gc_fit$vals$k / (gc_fit$vals$n0 +(gc_fit$vals$k - gc_fit$vals$n0)*exp(-jj*gc_fit$vals$r))
+pred<- round(c(pred, f),0)                
+}
+
+# In R, the calendar starts at 1970-01-01
+poi<- round(gc_fit$vals$t_mid+18322,0)
+class(poi)<- "Date"
+
+# Plot the results based on the latest data:
+par(mfrow=c(1,1))
+plot(gc_fit,
+     main="Covid-19 Confirmed Cases in Canada", 
+          ylab="Cases", xlab="Day", 
+     type="l")
+lines(t,egm_fit, col="blue")
+legend("topleft",inset=0.025,
+       c("Confirmed Cases","Naive Exponential Prediction", "Logistic Growth Prediction"),
+       col=c("black","blue","red"), lty=c(5,1,1), pch=c(16,46,46), box.lty=0)
+text(5,550, cex=0.8,"(t = 0 is 1 March, 2020)")
+text(15,7000, cex=0.9, col="red",paste0("Estimated doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
+text(15,6200, cex=0.9, col="red", paste0("(Current doubling time = ", round(doub_time[n_max-n_min+1],1), " days)"))
+text(15,5400, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi))
+text(15,4700, cex=0.9,col="red", paste0("Area under logistic / Area under observed = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
+text(28,550, cex=0.8,font=3, paste0("Produced on ", today, "  (Data up to end of Day ", n_max,")"))
+
+# Plot the predicted time-path for the confirmed cases, up to 1 week ahead:
+par(mfrow=c(1,1))
+plot(pred, col="red",
+     main="Projected Cases, Up to 1 Week Ahead", 
+     ylab="Cases", xlab="Day", 
+     type="l")
+lines(t,total,type="b")
+legend("topleft",inset=0.025,
+       c("Confirmed Cases","Logistic Growth Prediction"),
+       col=c("black","red"), lty=c(NA,1), pch=c(1,46), box.lty=0)
+text(n_max+3, pred[n_pred], cex=0.8, col="red", paste0(pred[n_pred], " cases"))
+text(10,2500, cex=0.8,"(t = 0 is 1 March, 2020)")
+text(35,1000, cex=0.8,font=3, paste0("Produced on ", today, "  (Data up to end of Day ", n_max,")"))
+
+# Now plot a summary of the results using the successive sample periods:
+Obs<- seq(n_min:n_max)+n_min-1
+par(mfrow=c(2,2))
+plot(Obs,inflection, main="Estimated Inflection Date",
+        ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
+plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
+     ylab= "Ratio", xlab="Sample Size (Days)", type="b", col="red")
+abline(h=1, col="purple")
+plot(Obs,est_doub_time, main="Estimated Doubling Time",
+     ylab= "Days", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
+text(30,3.2, cex=0.8,col="red", "Note: Reversed y-axis")
+plot(Obs,doub_time, main="Actual Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(doub_time)))
+text(30,9, cex=0.8,col="red", "Note: Reversed y-axis")
+
+# END OF FILE  ###################################################################
