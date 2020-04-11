@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   10 April, 2020
+# LAST UPDATED:   11 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)
@@ -26,9 +26,9 @@ cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/
 dead<- cases$DEATHS
 n_min<- 10             # Smallest number of days to include in the sequential anlaysis
 n_max<- length(dead)   # Largest number of days to include in the sequential analysis
-                       # NOTE: "Day 1" for this analysis is 15 March, 2020
+                       # NOTE: "Day 1" for this analysis is 14 March, 2020
 
-# Run the model over various samples of data, beginning on 15 March
+# Run the model over various samples of data, beginning on 14 March
 for (ii in n_min:n_max) {
 t<- seq(1:ii)
 deaths<- dead[1:ii]
