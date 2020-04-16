@@ -21,7 +21,6 @@ gof<- c()
 pred<- c()
 
 cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Ontario_Covid-19_Cases.txt", header=TRUE)
-
 #file_name <- "C:/Users/David Giles/Desktop/Virus/Ontario_Covid-19_Cases.txt"
 #cases <- read.table(file_name, header = TRUE)
 tot<- cases$TOTAL_CASES
@@ -103,7 +102,7 @@ lines(t,total,type="b")
 legend("topleft",inset=0.025,
        c("Confirmed Cases","Logistic Growth Prediction"),
        col=c("black","red"), lty=c(NA,1), pch=c(1,46), box.lty=0)
-text(10, 10000, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
+text(10, 4000, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
 text(n_max, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " cases"))
 text(5,500, cex=0.8,"(t = 0 is 1 March, 2020)")
 text(40,500, cex=0.8,font=3, paste0("Produced on ", today ))
