@@ -21,6 +21,7 @@ gof<- c()
 pred<- c()
 
 cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Ontario_Covid-19_Cases.txt", header=TRUE)
+
 #file_name <- "C:/Users/David Giles/Desktop/Virus/Ontario_Covid-19_Cases.txt"
 #cases <- read.table(file_name, header = TRUE)
 tot<- cases$TOTAL_CASES

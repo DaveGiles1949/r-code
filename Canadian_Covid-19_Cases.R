@@ -86,7 +86,7 @@ text(12,8000, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
 text(12,7000, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
 text(12,6000, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
 text(12,4700, cex=0.9,col="red", paste0("Area under logistic / Area under observed = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
-text(5,550, cex=0.8,"(t = 0 is 1 March, 2020)")
+text(5,700, cex=0.8,"(t = 0 is 1 March, 2020)")
 text(35,550, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Plot the predicted time-path for the confirmed cases, up to 1 week ahead:

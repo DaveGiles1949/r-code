@@ -86,8 +86,8 @@ legend("topleft",inset=0.025,
 text(4,25, cex=0.8,"(t = 0 is 17 March, 2020)")
 text(7, 150, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
 text(7,125, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
-text(7,115, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
-text(7,105, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
+text(7,110, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
+text(7,90, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
 text(24,1, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Plot the predicted time-path for deaths, up to 1 week ahead:
@@ -102,8 +102,8 @@ lines(t,deaths,type="o")
 legend("topleft",inset=0.025,
        c("Deaths","Logistic Growth Prediction"),
        col=c("black","red"), lty=c(1,1), pch=c(1,46), box.lty=0)
-text(10, 400, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
-text(n_max+2, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
+text(10, 200, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
+text(n_max+1, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
 text(5,25, cex=0.8,"(t = 0 is 17 March, 2020)")
 text(27,1, cex=0.8,font=3, paste0("Produced on ", today))
 
