@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   12 April, 2020
+# LAST UPDATED:   18 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)
@@ -109,7 +109,8 @@ text(27,1, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Now plot a summary of the results using the successive sample periods:
 Obs<- seq(n_min:n_max)+n_min-1
-
+dummy<- seq(1:12)    # The actual doubling time is infinite if there are no changes in number of deaths in 2 successive days
+                     # So, dummy will be used for y-axis limits
 par(mfrow=c(2,2))
 plot(Obs,inflection, main="Estimated Inflection Date",
      ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
@@ -119,5 +120,7 @@ abline(h=1, col="purple")
 plot(Obs,est_doub_time, main="Logistic Doubling Time",
      ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
 text(20,1.5, cex=0.8,col="blue", "Note: Reversed y-axis")
-
+plot(Obs,doub_time, main="Actual Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(dummy)))
+text(21,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 # END OF FILE  ###################################################################
