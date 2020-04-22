@@ -20,10 +20,10 @@ est_doub_time<- c()
 gof<- c()
 pred<- c()
 
-cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Cases.txt", header=TRUE)
+#cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Cases.txt", header=TRUE)
 
-#file_name <- "C:/Users/David Giles/Desktop/Virus/Canadian_Covid-19_Cases.txt"
-#cases <- read.table(file_name, header = TRUE)
+file_name <- "C:/Users/David Giles/Desktop/Virus/Canadian_Covid-19_Cases.txt"
+cases <- read.table(file_name, header = TRUE)
 tot<- cases$TOTAL_CASES
 n_min<- 26             # Smallest number of days to include in the sequential anlaysis
 n_max<- length(tot)    # Largest number of days to include in the sequential analysis
@@ -82,11 +82,11 @@ lines(t,egm_fit, col="blue")
 legend("topleft",inset=0.025,
        c("Confirmed Cases","Naive Exponential Prediction", "Logistic Growth Prediction"),
        col=c("black","blue","red"), lty=c(5,1,1), pch=c(16,46,46), box.lty=0)
-text(12,8000, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
-text(12,7000, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
-text(12,6000, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
-text(12,4700, cex=0.9,col="red", paste0("Area under logistic / Area under observed = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
-text(5,700, cex=0.8,"(t = 0 is 1 March, 2020)")
+text(12,12000, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
+text(12,10000, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
+text(12,8000, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
+text(12,6000, cex=0.9,col="red", paste0("Area under logistic / Area under observed = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
+text(5,1000, cex=0.8,"(t = 0 is 1 March, 2020)")
 text(35,550, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Plot the predicted time-path for the confirmed cases, up to 1 week ahead:
@@ -119,7 +119,7 @@ plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
 abline(h=1, col="purple")
 plot(Obs,est_doub_time, main="Logistic Doubling Time",
      ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
-text(30,3.2, cex=0.8,col="blue", "Note: Reversed y-axis")
+text(30,3.6, cex=0.8,col="blue", "Note: Reversed y-axis")
 plot(Obs,doub_time, main="Actual Doubling Time",
      ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(doub_time)))
 text(30,9, cex=0.8,col="blue", "Note: Reversed y-axis")
