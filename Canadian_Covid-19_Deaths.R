@@ -1,4 +1,4 @@
-# CODE FOR MODELLING THE GROWTH CURVE OF TOTAL CONFIRMED COVID-19 CASES IN CANADA
+# CODE FOR MODELLING THE GROWTH CURVE OF TOTAL CONFIRMED COVID-19 DEATHS IN CANADA
 
 # (AVAILABLE AT:  https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Deaths.R )
 # ---------------------------------------------------------------------------------------------------------
@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   11 April, 2020
+# LAST UPDATED:   22 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)
@@ -20,9 +20,9 @@ pred<- c()
 est_doub_time<- c()
 gof<- c()
 
-cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Deaths.txt", header=TRUE)
-#file_name <- "C:/Users/David Giles/Desktop/Virus/Canadian_Covid-19_Deaths.txt"
-#cases <- read.table(file_name, header = TRUE)
+#cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Deaths.txt", header=TRUE)
+file_name <- "C:/Users/David Giles/Desktop/Virus/Canadian_Covid-19_Deaths.txt"
+cases <- read.table(file_name, header = TRUE)
 dead<- cases$DEATHS
 n_min<- 10             # Smallest number of days to include in the sequential anlaysis
 n_max<- length(dead)   # Largest number of days to include in the sequential analysis
@@ -83,12 +83,12 @@ lines(t,egm_fit, col="blue")
 legend("topleft",inset=0.025,
        c("Deaths","Naive Exponential Prediction", "Logistic Growth Prediction"),
        col=c("black","blue","red"), lty=c(1,1,1), pch=c(16,46,46), box.lty=0)
-text(13,1, cex=0.8,"(t = 0 is 13 March, 2020)")
-text(8, 250, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
-text(8,210, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
-text(8,160, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
-text(8,120, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
-text(24,1, cex=0.8,font=3, paste0("Produced on ", today))
+text(17,1, cex=0.8,"(t = 0 is 13 March, 2020)")
+text(12, 500, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
+text(12,425, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
+text(12,350, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
+text(12,275, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
+text(35,1, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Plot the predicted time-path for deaths, up to 1 week ahead:
 poi3<- round(18334+n_pred,0)    # Day 18334 is 2020-03-13
@@ -121,7 +121,7 @@ plot(Obs,est_doub_time, main="Logistic Doubling Time",
 text(20,1.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 plot(Obs,doub_time, main="Actual Doubling Time",
      ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(doub_time)))
-text(21,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
+text(23,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 ##########################################################
 # Alternative plot
 
