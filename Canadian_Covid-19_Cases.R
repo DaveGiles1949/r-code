@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   15 April, 2020
+# LAST UPDATED:   22 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)  
