@@ -1,6 +1,6 @@
 # CODE FOR MODELLING THE GROWTH CURVE OF TOTAL CONFIRMED COVID-19 CASES IN ONTARIO
 
-# (AVAILABLE AT:  https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Cases.R )
+# (AVAILABLE AT:  https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Ontario_Covid-19_Cases.R )
 # ---------------------------------------------------------------------------------------------------------
 
 # DATA SOURCE:    https://www.covid-19canada.com/
