@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   22 April, 2020
+# LAST UPDATED:   23 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)
@@ -106,6 +106,7 @@ text(10, 200, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
 text(n_max+1, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
 text(5,50, cex=0.8,"(t = 0 is 17 March, 2020)")
 text(27,1, cex=0.8,font=3, paste0("Produced on ", today))
+text(10,400, col="red", cex=0.8, paste0("max = ", round(gc_fit$vals$k,0), " +/- ", round(2*gc_fit$vals$k_se,0)))
 
 # Now plot a summary of the results using the successive sample periods:
 Obs<- seq(n_min:n_max)+n_min-1
