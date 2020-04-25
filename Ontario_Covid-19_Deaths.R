@@ -83,12 +83,12 @@ lines(t,egm_fit, col="blue")
 legend("topleft",inset=0.025,
        c("Deaths","Naive Exponential Prediction", "Logistic Growth Prediction"),
        col=c("black","blue","red"), lty=c(1,1,1), pch=c(16,46,46), box.lty=0)
-text(4,25, cex=0.8,"(t = 0 is 17 March, 2020)")
+text(4,40, cex=0.8,"(t = 0 is 17 March, 2020)")
 text(10, 200, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
 text(10,175, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
 text(10,150, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
 text(10,125, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
-text(24,1, cex=0.8,font=3, paste0("Produced on ", today))
+text(30,1, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Plot the predicted time-path for deaths, up to 1 week ahead:
 poi3<- round(18337+n_pred,0)    # Day 18337 is 2020-03-16
@@ -103,9 +103,9 @@ legend("topleft",inset=0.025,
        c("Deaths","Logistic Growth Prediction"),
        col=c("black","red"), lty=c(1,1), pch=c(1,46), box.lty=0)
 text(10, 200, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
-text(n_max+1, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
+text(n_max, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
 text(5,50, cex=0.8,"(t = 0 is 17 March, 2020)")
-text(27,1, cex=0.8,font=3, paste0("Produced on ", today))
+text(35,1, cex=0.8,font=3, paste0("Produced on ", today))
 text(10,400, col="red", cex=0.8, paste0("max = ", round(gc_fit$vals$k,0), " +/- ", round(2*gc_fit$vals$k_se,0)))
 
 # Now plot a summary of the results using the successive sample periods:
@@ -123,5 +123,5 @@ plot(Obs,est_doub_time, main="Logistic Doubling Time",
 text(20,1.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 plot(Obs,doub_time, main="Actual Doubling Time",
      ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(dummy)))
-text(21,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
+text(19,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 # END OF FILE  ###################################################################
