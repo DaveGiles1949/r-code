@@ -83,12 +83,12 @@ lines(t,egm_fit, col="blue")
 legend("topleft",inset=0.025,
        c("Deaths","Naive Exponential Prediction", "Logistic Growth Prediction"),
        col=c("black","blue","red"), lty=c(1,1,1), pch=c(16,46,46), box.lty=0)
-text(17,1, cex=0.8,"(t = 0 is 13 March, 2020)")
-text(12, 500, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
-text(12,425, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
-text(12,350, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
-text(12,275, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
-text(35,1, cex=0.8,font=3, paste0("Produced on ", today))
+text(6,100, cex=0.8,"(t = 0 is 13 March, 2020)")
+text(12, 800, cex=0.9, col="blue", paste0("Sample up to end of Day ", poi2))
+text(12,700, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit$vals$t_gen,1), " days") )
+text(12,600, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
+text(12,500, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
+text(35,10, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Plot the predicted time-path for deaths, up to 1 week ahead:
 poi3<- round(18334+n_pred,0)    # Day 18334 is 2020-03-13
@@ -103,9 +103,9 @@ legend("topleft",inset=0.025,
        c("Deaths","Logistic Growth Prediction"),
        col=c("black","red"), lty=c(1,1), pch=c(1,46), box.lty=0)
 text(10, 400, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
-text(n_max+1, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
-text(5,80, cex=0.8,"(t = 0 is 13 March, 2020)")
-text(27,1, cex=0.8,font=3, paste0("Produced on ", today))
+text(n_max-1, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
+text(5,120, cex=0.8,"(t = 0 is 13 March, 2020)")
+text(35,1, cex=0.8,font=3, paste0("Produced on ", today))
 
 # Now plot a summary of the results using the successive sample periods:
 Obs<- seq(n_min:n_max)+n_min-1
