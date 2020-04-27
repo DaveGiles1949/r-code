@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   22 April, 2020
+# LAST UPDATED:   27 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)
@@ -89,6 +89,21 @@ text(12,700, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit
 text(12,600, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
 text(12,500, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
 text(35,10, cex=0.8,font=3, paste0("Produced on ", today))
+# Now plot a summary of the results using the successive sample periods:
+Obs<- seq(n_min:n_max)+n_min-1
+
+par(mfrow=c(2,2))
+plot(Obs,inflection, main="Estimated Inflection Date",
+     ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
+plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
+     ylab= "Ratio", xlab="Sample Size (Days)", type="b", col="red")
+abline(h=1, col="purple")
+plot(Obs,est_doub_time, main="Logistic Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
+text(20,1.5, cex=0.8,col="blue", "Note: Reversed y-axis")
+plot(Obs,doub_time, main="Actual Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(doub_time)))
+text(23,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 
 # Plot the predicted time-path for deaths, up to 1 week ahead:
 poi3<- round(18334+n_pred,0)    # Day 18334 is 2020-03-13
@@ -106,22 +121,9 @@ text(10, 400, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
 text(n_max-1, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " deaths"))
 text(5,120, cex=0.8,"(t = 0 is 13 March, 2020)")
 text(35,1, cex=0.8,font=3, paste0("Produced on ", today))
+deaths
+pred
 
-# Now plot a summary of the results using the successive sample periods:
-Obs<- seq(n_min:n_max)+n_min-1
-
-par(mfrow=c(2,2))
-plot(Obs,inflection, main="Estimated Inflection Date",
-     ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
-plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
-     ylab= "Ratio", xlab="Sample Size (Days)", type="b", col="red")
-abline(h=1, col="purple")
-plot(Obs,est_doub_time, main="Logistic Doubling Time",
-     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
-text(20,1.5, cex=0.8,col="blue", "Note: Reversed y-axis")
-plot(Obs,doub_time, main="Actual Doubling Time",
-     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(doub_time)))
-text(23,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 ##########################################################
 # Alternative plot
 

@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   23 April, 2020
+# LAST UPDATED:   27 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)
@@ -89,6 +89,22 @@ text(10,175, cex=0.9, col="red",paste0("Logistic doubling time = ", round(gc_fit
 text(10,150, cex=0.9,col="red", paste0("Median date (point of inflection) = ", poi1))
 text(10,125, cex=0.9,col="red", paste0("Area under logistic / Area under actual = ", round(gc_fit$vals$auc_l/gc_fit$vals$auc_e,4)))
 text(30,1, cex=0.8,font=3, paste0("Produced on ", today))
+# Now plot a summary of the results using the successive sample periods:
+Obs<- seq(n_min:n_max)+n_min-1
+dummy<- seq(1:12)    # The actual doubling time is infinite if there are no changes in number of deaths in 2 successive days
+# So, dummy will be used for y-axis limits
+par(mfrow=c(2,2))
+plot(Obs,inflection, main="Estimated Inflection Date",
+     ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
+plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
+     ylab= "Ratio", xlab="Sample Size (Days)", type="b", col="red")
+abline(h=1, col="purple")
+plot(Obs,est_doub_time, main="Logistic Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
+text(20,1.5, cex=0.8,col="blue", "Note: Reversed y-axis")
+plot(Obs,doub_time, main="Actual Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(dummy)))
+text(19,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 
 # Plot the predicted time-path for deaths, up to 1 week ahead:
 poi3<- round(18337+n_pred,0)    # Day 18337 is 2020-03-16
@@ -107,21 +123,7 @@ text(n_max, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], 
 text(5,50, cex=0.8,"(t = 0 is 17 March, 2020)")
 text(35,1, cex=0.8,font=3, paste0("Produced on ", today))
 text(10,400, col="red", cex=0.8, paste0("max = ", round(gc_fit$vals$k,0), " +/- ", round(2*gc_fit$vals$k_se,0)))
+deaths
+pred
 
-# Now plot a summary of the results using the successive sample periods:
-Obs<- seq(n_min:n_max)+n_min-1
-dummy<- seq(1:12)    # The actual doubling time is infinite if there are no changes in number of deaths in 2 successive days
-                     # So, dummy will be used for y-axis limits
-par(mfrow=c(2,2))
-plot(Obs,inflection, main="Estimated Inflection Date",
-     ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
-plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
-     ylab= "Ratio", xlab="Sample Size (Days)", type="b", col="red")
-abline(h=1, col="purple")
-plot(Obs,est_doub_time, main="Logistic Doubling Time",
-     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
-text(20,1.5, cex=0.8,col="blue", "Note: Reversed y-axis")
-plot(Obs,doub_time, main="Actual Doubling Time",
-     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(dummy)))
-text(19,8.5, cex=0.8,col="blue", "Note: Reversed y-axis")
 # END OF FILE  ###################################################################

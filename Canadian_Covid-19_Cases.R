@@ -7,7 +7,7 @@
 
 # AUTHOR:         DAVID GILES (davegiles1949@gmail.com)
 
-# LAST UPDATED:   26 April, 2020
+# LAST UPDATED:   27 April, 2020
 # ---------------------------------------------------------------------------------------------------------
 
 library(growthcurver)  
@@ -89,6 +89,22 @@ text(13,9000, cex=0.9,col="red", paste0("Area under logistic / Area under observ
 text(5,2000, cex=0.8,"(t = 0 is 1 March, 2020)")
 text(40,550, cex=0.8,font=3, paste0("Produced on ", today))
 
+# Now plot a summary of the results using the successive sample periods:
+
+Obs<- seq(n_min:n_max)+n_min-1
+par(mfrow=c(2,2))
+plot(Obs,inflection, main="Estimated Inflection Date",
+     ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
+plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
+     ylab= "Ratio", xlab="Sample Size (Days)", type="b", col="red")
+abline(h=1, col="purple")
+plot(Obs,est_doub_time, main="Logistic Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
+text(35,4.5, cex=0.8,col="blue", "Note: Reversed y-axis")
+plot(Obs,doub_time, main="Actual Doubling Time",
+     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(doub_time)))
+text(35,15, cex=0.8,col="blue", "Note: Reversed y-axis")
+
 # Plot the predicted time-path for the confirmed cases, up to 1 week ahead:
 # In R, the calendar starts at 1970-01-01
 
@@ -107,21 +123,8 @@ text(10, 10000, cex=0.9, col="blue", paste0("Sample up to end of  ", poi2))
 text(n_max-2, pred[n_pred], cex=0.8, col="red", paste0(poi3, " = ", pred[n_pred], " cases"))
 text(10,3000, cex=0.8,"(t = 0 is 1 March, 2020)")
 text(48,1000, cex=0.8,font=3, paste0("Produced on ", today ))
+cases
+pred
 
-# Now plot a summary of the results using the successive sample periods:
-
-Obs<- seq(n_min:n_max)+n_min-1
-par(mfrow=c(2,2))
-plot(Obs,inflection, main="Estimated Inflection Date",
-        ylab= "Inflection (Day)", xlab="Sample Size (Days)", type="b", col="red")
-plot(Obs,gof, main="Area Under Logistic / Area Under Actual",
-     ylab= "Ratio", xlab="Sample Size (Days)", type="b", col="red")
-abline(h=1, col="purple")
-plot(Obs,est_doub_time, main="Logistic Doubling Time",
-     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", col="red",type="b", ylim = rev(range(est_doub_time)))
-text(35,4.5, cex=0.8,col="blue", "Note: Reversed y-axis")
-plot(Obs,doub_time, main="Actual Doubling Time",
-     ylab= "Doubling Time (Days)", xlab="Sample Size (Days)", type="b", col="red", ylim = rev(range(doub_time)))
-text(35,15, cex=0.8,col="blue", "Note: Reversed y-axis")
 
 # END OF FILE  ###################################################################
