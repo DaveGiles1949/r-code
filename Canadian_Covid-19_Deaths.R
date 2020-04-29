@@ -20,9 +20,9 @@ pred<- c()
 est_doub_time<- c()
 gof<- c()
 
-#cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Deaths.txt", header=TRUE)
-file_name <- "C:/Users/David Giles/Desktop/Virus/Canadian_Covid-19_Deaths.txt"
-cases <- read.table(file_name, header = TRUE)
+cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Canadian_Covid-19_Deaths.txt", header=TRUE)
+#file_name <- "C:/Users/David Giles/Desktop/Virus/Canadian_Covid-19_Deaths.txt"
+#cases <- read.table(file_name, header = TRUE)
 dead<- cases$DEATHS
 n_min<- 10             # Smallest number of days to include in the sequential anlaysis
 n_max<- length(dead)   # Largest number of days to include in the sequential analysis

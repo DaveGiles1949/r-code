@@ -20,9 +20,9 @@ pred<- c()
 est_doub_time<- c()
 gof<- c()
 
-#cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Ontario_Covid-19_Deaths.txt", header=TRUE)
-file_name <- "C:/Users/David Giles/Desktop/Virus/Ontario_Covid-19_Deaths.txt"
-cases <- read.table(file_name, header = TRUE)
+cases<- read.csv("https://raw.githubusercontent.com/DaveGiles1949/r-code/master/Ontario_Covid-19_Deaths.txt", header=TRUE)
+#file_name <- "C:/Users/David Giles/Desktop/Virus/Ontario_Covid-19_Deaths.txt"
+#cases <- read.table(file_name, header = TRUE)
 dead<- cases$DEATHS
 n_min<- 10             # Smallest number of days to include in the sequential anlaysis
 n_max<- length(dead)   # Largest number of days to include in the sequential analysis
@@ -125,5 +125,6 @@ text(35,1, cex=0.8,font=3, paste0("Produced on ", today))
 text(10,400, col="red", cex=0.8, paste0("max = ", round(gc_fit$vals$k,0), " +/- ", round(2*gc_fit$vals$k_se,0)))
 deaths
 pred
+
 
 # END OF FILE  ###################################################################
