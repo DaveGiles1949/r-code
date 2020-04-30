@@ -1,4 +1,4 @@
-# Last update: 29 April, 2020
+# Last update: 30 April, 2020
 # ---------------------------
 
 library(growthcurver)
@@ -89,11 +89,11 @@ plot(t7,fitted, type="l",
      ylab="Cases", xlab="Days", ylim=c(0,max(up)), col="blue")
 lines(t7,upper, col="red", lty=2)
 lines(t7,lower, col="red", lty=2)
-lines(t,tot, type="p",lty=0)
+lines(t,tot, type="p",lty=0, pch=16,cex=0.5)
 abline(v=n_max, col="purple")
 legend("topleft",inset=0.025,
        c("Actual","Logistic Model Prediction", "lower 95% C.I.", "upper 95% C.I."),
-       col=c("black","blue", "red","red"), lty=c(0,1,2,2), pch=c(1,46,46,46), box.lty=0)
+       col=c("black","blue", "red","red"), lty=c(0,1,2,2), pch=c(16,46,46,46), box.lty=0)
 text(15, 10000, cex=0.9, col="blue", paste0("Sample up to end of day ", poi2))
 text(33,25, cex=0.8,font=3, paste0("Produced on ", today))
 text(n_pred,tot[n_max]-6000, cex=0.7, col="red", max(low))
