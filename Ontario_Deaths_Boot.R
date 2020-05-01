@@ -101,6 +101,8 @@ text(n_pred,deaths[n_max]-100, cex=0.7, col="red", max(low))
 text(n_pred,deaths[n_max], cex=0.7, col="red" , max(up))
 text(n_pred,deaths[n_max]-50, cex=0.7, col="blue", fitted[n_pred])
 text(n_pred-1,deaths[n_max]-150, cex=0.7, poi1)
+
+deaths[n_max]
 low
 fore
 up

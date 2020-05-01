@@ -100,6 +100,8 @@ text(n_pred,tot[n_max]-6000, cex=0.7, col="red", max(low))
 text(n_pred,tot[n_max], cex=0.7, col="red" , max(up))
 text(n_pred,tot[n_max]-3000, cex=0.7, col="blue", fitted[n_pred])
 text(n_pred-1,tot[n_max]-10000, cex=0.7, poi1)
+
+tot[n_max]
 low
 fore
 up
