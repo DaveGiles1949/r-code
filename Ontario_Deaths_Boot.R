@@ -106,5 +106,7 @@ deaths[n_max]
 low
 fore
 up
-
+gc_fit$vals$k
+gc_fit$vals$k-2*gc_fit$vals$k_se
+gc_fit$vals$k+2*gc_fit$vals$k_se
 # END OF FILE  ###################################################################
