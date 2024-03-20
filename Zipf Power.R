@@ -31,7 +31,7 @@ q<- c(0.0873	,	0.1133	,	0.1771		)
 # -----------------------------
 
 for(jj in 1:Nvals) {
-N[jj]<- 5+jj*Nstep      # smallest value of N is 10
+N[jj]<- 5+jj*Nstep      # smallest value of N is 7
 for(ii in 1:nrep) {
 H<- 0
 #xb<- rzipf(N[jj],n,s)                       # The null hypothesis is TRUE
