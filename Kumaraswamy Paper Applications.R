@@ -5,11 +5,12 @@ require(univariateML)  # For the Kumaraswamy MLE
 require(VGAM)          # For the Kumaraswamy distribution 
 require(stats)
 
+# Note: The 2 data series that are used can be accessed at   https://github.com/DaveGiles1949/Data
 
-HE_dat<- read.table(file = 'C:/Users/David Giles/Dropbox/Power Laws/Hidden Economy/Annual sizes.txt',header = TRUE)
+HE_dat<- read.table(file = 'C:/Users/David Giles/Dropbox/GOF Testing/Kumaraswamy/Kumaraswamy Test_HE Data.txt',header = TRUE)
 HE17<- HE_dat[,27]/100
 
-gini<- read.table(file = 'C:/Users/David Giles/Dropbox/GOF Testing/Kumaraswamy/GINI.txt',header = TRUE)$GINI/100
+gini<- read.table(file = 'C:/Users/David Giles/Dropbox/GOF Testing/Kumaraswamy/Kumaraswamy Test_Gini Data.txt',header = TRUE)$GINI/100
 
 x<- c()
 wk<- c()
@@ -22,8 +23,9 @@ Kuiper<- c()
 shape1<- c()    #[1] for Kumar; [2] for Beta
 shape2<- c()    #[1] for Kumar; [2] for Beta
 
-#x<- gini     # Gini Index data
-x<- HE17      # Hidden Economy data 
+# Use the next 2 lines to select the data for each application
+x<- gini     # Gini Index data
+#x<- HE17      # Hidden Economy data 
 n<- length(x)
 y<- matrix(nrow=n, ncol=2)
 
@@ -112,32 +114,56 @@ c(crit_Watson_5, crit_Watson_10)
 CvM
 c(crit_CvM_5, crit_CvM_10)
 
+# Plot the results:
+#----------------
+# First for the HE data:
+# Note that the shape coefficients have been computed with x=HE data
 
-par(mfrow=c(1,3))
+par(mfrow=c(1,1))
 #y<- rkumar(n,shape1[1], shape2[1])
 #y<- rbeta(n, shape1[2], shape2[2])
 h<- hist(x, prob=TRUE,main="Figure 3 (a): Hidden Economy Densities", xlab="HE (share of GDP)", col="seashell2",breaks=12)
-xfit<- seq(0,1,length=40)
+xfit<- seq(0,1,length=100)
 yfitk<- dkumar(xfit,shape1[1], shape2[1])
 yfit<- dbeta(xfit, shape1[2], shape2[2])
-lines(xfit, yfit, col="tomato3", lwd=2)
-lines(xfit, yfitk, col="blue", lwd=2, lty=3)
-legend(0.35, 3.36,legend = c(expression("Beta PDF"),
+lines(xfit, yfit, col="tomato3", lwd=1)
+lines(xfit, yfitk, col="blue", lwd=1, lty=2)
+legend(0.41, 3.36,legend = c(expression("Beta PDF"),
                          expression("Kuma. PDF")), 
-                         box.col="white", col=c("red","blue"),lty=c(1,2),ncol=1)
+                         box.col="white", col=c("red","blue"),lty=c(1,2),ncol=1, cex=0.8)
 p<- ecdf(x)  
-plot(p, verticals=TRUE, do.points=FALSE, col="blue", main="Figure 3 (b): Distribution Functions", xlab="HE (share of GDP)", ylab="CDF")
-xxfit<- seq(0,1, length=40)
-yyfit<- pbeta(xxfit, shape1[2], shape2[2])
-lines(xxfit, yyfit, col="red", lwd=2)
-legend(0.26, 0.4,legend = c(expression("Beta CDF"),
-                         expression("Empirical CDF")), 
-                         box.col="white", col=c("red","blue"),lty=c(1,1),ncol=1)
+plot(p, verticals=TRUE, do.points=FALSE, col="black", main="Figure 3 (b): Distribution Functions", xlab="HE (share of GDP)", ylab="CDF")
+xxfit<- seq(0,1, length=100)
+yyfitk<- pkumar(xxfit, shape1[1], shape2[1])
+yyfitb<- pbeta(xxfit, shape1[2], shape2[2])
+lines(xxfit, yyfitb, col="red", lwd=1)
+lines(xxfit, yyfitk, col="blue", lwd=1,lty=2)
+legend(0.26, 0.4,legend = c(expression("Beta CDF"), expression("Kuma. CDF"),
+                         expression("Empirical CDF")),
+                         box.col="white", col=c("red","blue", "black"),lty=c(1,2,1),ncol=1, cex=0.8)
 
-plot(p, verticals=TRUE, do.points=FALSE, col="blue", main="Figure 3 (c): Distribution Functions", xlab="HE (share of GDP)", ylab="CDF")
-xxfit<- seq(0,1, length=40)
-yyfit<- pkumar(xxfit, shape1[1], shape2[1])
-lines(xxfit, yyfit, col="red", lwd=2)
-legend(0.26, 0.4,legend = c(expression("Kuma. CDF"),
-                         expression("Empirical CDF")), 
-                         box.col="white", col=c("red","blue"),lty=c(1,1),ncol=1)
+# Now for the Gini coefficient data:
+# Note that the shape coefficients have been computed with x=GINI data
+
+par(mfrow=c(1,1))
+#y<- rkumar(n,shape1[1], shape2[1])
+#y<- rbeta(n, shape1[2], shape2[2])
+h<- hist(x, prob=TRUE,main="Figure 4 (a): Gini Index Densities", xlab="Gini Index", col="seashell2",breaks=12)
+xfit<- seq(0,1,length=100)
+yfitk<- dkumar(xfit,shape1[1], shape2[1])
+yfit<- dbeta(xfit, shape1[2], shape2[2])
+lines(xfit, yfit, col="tomato3", lwd=1)
+lines(xfit, yfitk, col="blue", lwd=1, lty=2)
+legend(0.43, 5,legend = c(expression("Beta PDF"),
+                         expression("Kuma. PDF")), 
+                         box.col="white", col=c("red","blue"),lty=c(1,2),ncol=1, cex=0.8)
+p<- ecdf(x)  
+plot(p, verticals=TRUE, do.points=FALSE, col="black", main="Figure 4 (b): Distribution Functions", xlab="Gini Index", ylab="CDF")
+xxfit<- seq(0,1, length=100)
+yyfitk<- pkumar(xxfit, shape1[1], shape2[1])
+yyfitb<- pbeta(xxfit, shape1[2], shape2[2])
+lines(xxfit, yyfitb, col="red", lwd=1)
+lines(xxfit, yyfitk, col="blue", lwd=1,lty=2)
+legend(0.31, 0.25,legend = c(expression("Beta CDF"), expression("Kuma. CDF"),
+                         expression("Empirical CDF")),
+                         box.col="white", col=c("red","blue", "black"),lty=c(1,2,1),ncol=1, cex=0.8)
