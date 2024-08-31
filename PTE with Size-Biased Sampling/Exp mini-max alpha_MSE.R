@@ -36,7 +36,7 @@ lambda[i]<- (prod(x))^(1/n)/mean(x)    # This is for the case of length-biased
 
 crit<- quantile(lambda,  probs = c(0.95))
 		# The critical values are specific to the Exponential distribution; and the sample size
-
+# vary the first element of crit to minimize max(diff) at bottom of file
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #for (jj in 1 :3) {   
 # this loop needs to be built to search over different alpha values

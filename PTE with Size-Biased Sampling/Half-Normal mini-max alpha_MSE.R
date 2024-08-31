@@ -38,8 +38,8 @@ lambda[i]<- (prod(x))^(1/n)/sqrt(2*sum(x^2)/(n*pi))          # This is for the c
 }
 
 crit<- quantile(lambda,  probs = c(0.778, 0.95, 0.99))
-#crit		 # The critical values are specific to the Rayleigh distribution; the value of the scale parameter; and the sample size
-
+#crit		 # The critical values are specific to the Half-Normal distribution; the value of the scale parameter; and the sample size
+# vary the first element of crit to minimize max(diff) at bottom of file
 # Set up outer loop for different bias sizes:
 
 #   k=1/2 is half-nornal. Size-biased gives Rayleigh, or k =1

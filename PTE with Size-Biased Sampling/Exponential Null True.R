@@ -55,7 +55,6 @@ crit<- critt[2]
 
 
 k<-  1   # Exponential: k  = 1 implies regular distribution; k = 2 implies length-biased; k = 3 implies area-biased
-#k<- 0    # Gamma : k = 0 implies regular; k = 1 implies length-biased; k = 2 implies area biased
 for ( i in 1:m) {
 
 y<- rggamma(n,1/theta,1,k)		# Exponential

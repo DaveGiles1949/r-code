@@ -31,7 +31,7 @@ lambda[i]<- (prod(x))^(1/n)/mean(x)    # This is for the case of length-biased
 
 crit<- quantile(lambda,  probs = c(0.999992, 0.965, 0.99))
 crit		# The critical values are specific to the Exponential distribution; and the sample size
-
+# vary the first element of crit to minimize max(diff) at bottom of file
 # LINEX specs
 w<- -2	#  Shape parameter for function (+ve or -ve)r LINEX loss
 # w>0 implies over-estimation more costly than under-estimation

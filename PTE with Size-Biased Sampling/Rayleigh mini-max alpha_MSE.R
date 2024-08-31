@@ -38,7 +38,7 @@ lambda[i]<- (prod(x))^(1/n)/sqrt(pi*sum(x^2)/(4*n))          # This is for the c
 }
 crit<- quantile(lambda,  probs = c(0.656, 0.95, 0.99))
 # The critical values are specific to the Rayleigh distribution; and the sample size
-
+# vary the first element of crit to minimize max(diff) at bottom of file
 # Set up outer loop for different bias sizes:
 
 #   k=1 is Rayleigh. Size-biased gives k = 3/2

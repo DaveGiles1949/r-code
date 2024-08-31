@@ -55,12 +55,9 @@ crit		# The critical values are specific to the Exponential distribution; the va
 
 
 k<-  2   # Exponential: k  = 1 implies regular distribution; k = 2 implies length-biased; k = 3 implies area-biased
-#k<- 0    # Gamma : k = 0 implies regular; k = 1 implies length-biased; k = 2 implies area biased
 for ( i in 1:m) {
 
 y<- rggamma(n,1/theta,1,k)		# Exponential
-#y<- rggamma(n,a,d,p+k)		      # Gamma
-#y<- rggamma(n,)				# Weibull
 lam1[i]<- (prod(y))^(1/n)/(mean(y))
 theta_tilde[i]<- 1/mean(y)
 theta_hat[i]<- 2/mean(y)
