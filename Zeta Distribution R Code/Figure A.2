@@ -1,0 +1,54 @@
+# Code for Figure A.2
+####################
+
+library(UnivRNG)
+library(tolerance)
+
+set.seed(123)
+repMC<- 10000	
+n<- 10  
+s<- seq(1.25,4.25, by = 0.25)    # values between 1.7 and 3.7 are important
+ls<- length(s)
+
+bias_stilde<- c()
+var_stilde<- c()  
+smle<- c() 
+
+for(jj in 1:ls) {
+
+ss<- s[jj]
+sum_stilde<- sum_stilde2<- 0
+
+# Start the MC Loop:
+
+for (ii in 1:repMC) {
+
+# Generate Zeta dist'n. sample data
+
+zeta.data<- draw.zeta(n, ss)$y        # Using the 'UnivRNG' package
+
+# Obtain the MLE of "s":
+
+out.zeta<- zm.ll(zeta.data, N = Inf, dist = "Zeta")   # Using the 'tolerance' package
+smle[ii]<- stats4::coef(out.zeta)
+
+}    
+
+# End of MC loop
+
+bias_stilde[jj]<- mean(smle) - ss       # This is the MC estimate of the FULL bias of the MLE
+var_stilde[jj]<- var(smle)
+
+}
+
+# End of "s" loop
+
+bias_stilde
+var_stilde
+
+plot(s, bias_stilde, type="l", lty=1, lwd="2",ylab="Bias & Std. Dev.",col="red", main = "Figure A.2: Bias & Std. Deviation of MLE of s
+{ N = 10)")
+lines(s, sqrt(var_stilde), type="l", lty=2,lwd="2", col="blue")
+legend(1.4,12.5, c("Bias", "Std. Dev. "), col=c("red","blue"), lwd=c(2,2),lty=c(1:2))
+
+# END (not run)
