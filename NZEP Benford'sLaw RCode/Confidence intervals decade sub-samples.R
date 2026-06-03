@@ -49,10 +49,6 @@ tstat_20<- tstat_20[!is.na(tstat_20)]
 
 # set up data for the 1990's only
 
-coef_90<- c(coef_1990,coef_1991,coef_1992,coef_1993,coef_1994,coef_1995,coef_1996,coef_1997,coef_1998,coef_1999)
-se_90<- c(se_1990,se_1992,se_1995,se_1996,se_1997,se_1998,se_1999)
-tstat_90<- c(tstat_1990,tstat_1991,tstat_1992,tstat_1993,tstat_1994,tstat_1995,tstat_1996,tstat_1997,tstat_1998,tstat_1999)
-
 # First digits
 # ------------
 
