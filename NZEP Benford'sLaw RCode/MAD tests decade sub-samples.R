@@ -2,6 +2,7 @@
 #############################################
 library(benford.analysis)
 library(stringr)
+library(readxl)
 
 
 coef_6070<- read_excel("C:/Users/OEM/Sync/Benford Law/NZEP/NZEP.xlsx",sheet="coef", range=cell_cols("A:M"))
