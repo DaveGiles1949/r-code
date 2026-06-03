@@ -8,6 +8,7 @@
 library(benford.analysis)
 library(stringr)
 set.seed(123)
+library(readxl)
 
 c<- c()
 s<- c()
@@ -49,6 +50,9 @@ se_20<- se_20[!is.na(se_20)]
 tstat_20<- read_excel("C:/Users/OEM/Sync/Benford Law/NZEP/NZEP.xlsx",sheet="tstat",range=cell_cols("AP:AR") )
 tstat_20<- tstat_20[!is.na(tstat_20)]
 
+coef_total<- c(coef_6070, coef_80, coef_90, coef_00, coef_10, coef_20)
+se_total<- c(se_6070, se_80, se_90, se_00, se_10, se_20)
+tstat_total<- c(tstat_6070, tstat_80, tstat_90, tstat_00, tstat_10, tstat_20)
 
 # First Digits
 ##############
