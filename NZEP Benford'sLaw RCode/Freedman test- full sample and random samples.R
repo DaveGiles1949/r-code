@@ -6,6 +6,7 @@
 ############################################################################
 
 library(benford.analysis)
+library(BenfordTests)
 library(stringr)
 library(readxl)
 
