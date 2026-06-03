@@ -94,7 +94,7 @@ se_1975<- se$se75[!is.na(se$se75)]
 # No s.e.'s in 1976
 se_1977<- se$se77[!is.na(se$se77)]
 # No s.e.'s in 1978
-se_1979<- coef$se79[!is.na(se$se79)]
+se_1979<- se$se79[!is.na(se$se79)]
 se_1980<- se$se80[!is.na(se$se80)]
 se_1981<- se$se81[!is.na(se$se81)]
 # No regressions published in 1982
