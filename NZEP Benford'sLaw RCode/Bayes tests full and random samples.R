@@ -140,7 +140,7 @@ x<- c()
 
 p2<- c(0.1197,0.1139,0.1088,0.1043,0.1,0.0967, 0.0934,0.0904,0.0876,0.0850)
 
-p0<- 0.5     # prior probability for null model (B-L)
+pi0<- 0.5     # prior probability for null model (B-L)
 theta<- p2
 alpha_1<- rep(1,10)
 alpha_2<- rep(0.1,10)
